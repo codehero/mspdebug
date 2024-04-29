@@ -6,6 +6,9 @@ Patches on top of https://github.com/dlbeer/mspdebug
   embedded in libmsp430.so.
 - Tested only with MSPFET v3 on Ubuntu 22.04.
 
+NOTE!!
+** On new MSPFET run mspdebug tilib --require-fw-update once to ensure parity between MSPFET firmware and libmsp430.so
+
 MSPDebug
 ========
 
