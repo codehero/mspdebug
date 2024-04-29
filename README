@@ -1,3 +1,11 @@
+Patches on top of https://github.com/dlbeer/mspdebug
+===============================================
+- Include MSPDS v3.15.1.1
+- Update Makefile to compile and install MSPDS
+- Update --require-fw-update flag to force update firmware
+  embedded in libmsp430.so.
+- Tested only with MSPFET v3 on Ubuntu 22.04.
+
 MSPDebug
 ========
 
