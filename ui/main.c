@@ -145,9 +145,8 @@ static void usage(const char *progname)
 "        Force target reset in initialization sequence.\n"
 "    --allow-fw-update\n"
 "        Update FET firmware (tilib only) if necessary.\n"
-"    --require-fw-update <image.txt>\n"
-"        Require FET firmware update. The required image format depends\n"
-"        on the driver.\n"
+"    --require-fw-update\n"
+"        Require FET firmware update of libmsp430 embedded fw.\n"
 "    --version\n"
 "        Show copyright and version information.\n"
 "    --embedded\n"
@@ -321,7 +320,7 @@ static int parse_cmdline_args(int argc, char **argv,
 		{"long-password",       0, 0, LOPT_LONG_PASSWORD},
 		{"force-reset",		0, 0, LOPT_FORCE_RESET},
 		{"allow-fw-update",	0, 0, LOPT_ALLOW_FW_UPDATE},
-		{"require-fw-update",	1, 0, LOPT_REQUIRE_FW_UPDATE},
+		{"require-fw-update",	0, 0, LOPT_REQUIRE_FW_UPDATE},
 		{"embedded",		0, 0, LOPT_EMBEDDED},
 		{"bsl-entry-sequence",	1, 0, LOPT_BSL_ENTRY_SEQUENCE},
 		{"bsl-gpio-rts",	1, 0, LOPT_BSL_GPIO_RTS},
@@ -378,6 +377,10 @@ static int parse_cmdline_args(int argc, char **argv,
 			args->flags |= OPT_EMBEDDED;
 			break;
 
+		case LOPT_REQUIRE_FW_UPDATE:
+			args->devarg.flags |= DEVICE_FLAG_REQUIRE_FWUPDATE;
+                        break;
+
 		case LOPT_ALLOW_FW_UPDATE:
 			args->devarg.flags |= DEVICE_FLAG_DO_FWUPDATE;
 			break;
@@ -392,10 +395,6 @@ static int parse_cmdline_args(int argc, char **argv,
 		case 'd':
 			args->devarg.path = optarg;
 			args->devarg.flags |= DEVICE_FLAG_TTY;
-			break;
-
-		case LOPT_REQUIRE_FW_UPDATE:
-			args->devarg.require_fwupdate = optarg;
 			break;
 
 		case 'U':

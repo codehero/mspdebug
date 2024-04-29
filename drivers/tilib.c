@@ -475,11 +475,10 @@ static int do_init(struct tilib_device *dev, const struct device_args *args)
 		return -1;
 	}
 
-	if (args->require_fwupdate) {
-		printc("Updating firmware using %s\n",
-		       args->require_fwupdate);
+	if (args->flags & DEVICE_FLAG_REQUIRE_FWUPDATE) {
+		printc("Updating firmware...\n");
 
-		if (do_fw_update(dev, args->require_fwupdate) < 0) {
+		if (do_fw_update(dev, NULL) < 0) {
 			tilib_api->MSP430_Close(0);
 			return -1;
 		}

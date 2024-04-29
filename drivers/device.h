@@ -76,6 +76,7 @@ struct device_breakpoint {
 #define DEVICE_FLAG_SKIP_CLOSE	0x20
 #define DEVICE_FLAG_BSL_NME     0x40 /* BSL no-mass-erase */
 #define DEVICE_FLAG_HAS_VID_PID 0x80
+#define DEVICE_FLAG_REQUIRE_FWUPDATE 0x100 /* Force update of embedded fw in lib */
 
 struct device_args {
 	int			flags;
@@ -83,7 +84,6 @@ struct device_args {
 	const char		*path;
 	const char		*forced_chip_id;
 	const char		*requested_serial;
-	const char		*require_fwupdate;
 	const char		*bsl_entry_seq;
 	int			bsl_gpio_used;
 	int			bsl_gpio_rts;
