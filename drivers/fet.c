@@ -88,6 +88,7 @@ static device_t fet_open_olimex_iso_mk2(const struct device_args *args)
 	if (!trans)
 		return NULL;
 
+    /* Tinylabs - Removed after changing args to --force-fw-update
 	if (args->require_fwupdate) {
 		if (obl_update(trans, args->require_fwupdate) < 0) {
 			trans->ops->destroy(trans);
@@ -110,7 +111,7 @@ static device_t fet_open_olimex_iso_mk2(const struct device_args *args)
 		if (!trans)
 			return NULL;
 	}
-
+    */
 	if (!obl_get_version(trans, &version))
 		printc_dbg("Olimex firmware version: %x\n", version);
 

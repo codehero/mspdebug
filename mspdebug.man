@@ -89,10 +89,8 @@ default, an initialization without reset will be tried first.
 When using a V3 FET device via the TI library, allow the library to
 perform a firmware update if the FET firmware is incompatible with the
 library.
-.IP "\-\-require-fw-update \fIimage.txt\fR"
-When using a V3 FET device, or certain Olimex devices, force a firmware
-update using the given firmware image. The firmware format depends on
-the driver.
+.IP "\-\-require-fw-update"
+Force update of MSPFET v3+ using fw embedded in libmsp430.so.
 .IP "\-\-version"
 Show program version and copyright information.
 .IP "\-\-embedded"

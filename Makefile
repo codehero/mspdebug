@@ -57,7 +57,7 @@ ifeq ($(OS),Windows_NT)
 else
     MSPDEBUG_CC = $(CC)
     BINARY = mspdebug
-
+	LIB = libmsp430.so
 
     ifneq ($(filter $(UNAME_S),OpenBSD NetBSD),)
 	OS_LIBS =
@@ -129,7 +129,11 @@ else
 clean:
 	$(RM) */*.o
 	$(RM) $(BINARY)
+	cd MSPDebugStack_OS_Package && make clean
 endif
+
+MSPDebugStack_OS_Package/$(LIB):
+	cd MSPDebugStack_OS_Package && make
 
 install: $(BINARY) mspdebug.man
 	mkdir -p $(DESTDIR)$(BINDIR)
@@ -139,6 +143,8 @@ install: $(BINARY) mspdebug.man
 	mkdir -p $(DESTDIR)$(LIBDIR)/mspdebug
 	$(INSTALL) -m 0644 ti_3410.fw.ihex \
 		$(DESTDIR)$(LIBDIR)/mspdebug/ti_3410.fw.ihex
+	$(INSTALL) -m 0644 MSPDebugStack_OS_Package/$(LIB) \
+		$(DESTDIR)$(LIBDIR)/$(LIB)
 
 uninstall:
 	$(RM) $(DESTDIR)$(BINDIR)$(BINARY) $(DESTDIR)$(MANDIR)/mspdebug.1\
@@ -235,7 +241,7 @@ OBJ=\
     $(CONSOLE_INPUT_OBJ) \
     ui/main.o
 
-$(BINARY): $(OBJ)
+$(BINARY): MSPDebugStack_OS_Package/$(LIB) $(OBJ)
 	$(MSPDEBUG_CC) $(MSPDEBUG_LDFLAGS) -o $@ $^ $(MSPDEBUG_LIBS)
 
 util/chipinfo.o:	chipinfo.db
